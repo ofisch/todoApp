@@ -51,17 +51,50 @@ window.addEventListener("load", () => {
         elementsToSave.push(i);
 
         taskDelete.addEventListener("click", () => {
-          for (i of elements) {
+          for (i of elementsToSave) {
             if (i == task.firstChild.firstChild.value) {
               console.log(
                 "poistettava arvo: ",
                 task.firstChild.firstChild.value
               );
-              elements.splice(elements.indexOf(i), 1);
+              elementsToSave.splice(elements.indexOf(i), 1);
               // päivitetään localStorage
-              localStorage.setItem("elements", JSON.stringify(elements));
+              localStorage.setItem("elements", JSON.stringify(elementsToSave));
               location.reload();
             }
+          }
+        });
+
+        let indexOfValue;
+
+        taskEdit.addEventListener("click", () => {
+          if (taskEdit.innerText.toLowerCase() == "muokkaa") {
+            taskInput.removeAttribute("readonly");
+            taskInput.focus();
+            taskEdit.innerText = "Tallenna";
+
+            // haetaan muokattava elementti taulukosta
+
+            for (i of elementsToSave) {
+              if (i == task.firstChild.firstChild.value) {
+                indexOfValue = elementsToSave.indexOf(i);
+
+                console.log(
+                  "first.first.value: ",
+                  task.firstChild.firstChild.value
+                );
+              }
+            }
+          } else {
+            taskInput.setAttribute("readonly", "readonly");
+            taskEdit.innerText = "Muokkaa";
+
+            // muokatun version tallentaminen localStorageen
+            console.log("taskInput.value: ", taskInput.value);
+            elementsToSave[indexOfValue] = taskInput.value;
+
+            localStorage.clear();
+            localStorage.setItem("elements", JSON.stringify(elementsToSave));
           }
         });
       }
