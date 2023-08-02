@@ -1,11 +1,10 @@
 :root {
-  --dark: #374151;
-  --darker: #1f2937;
-  --darkest: #111827;
-  --gray: #6b7280;
-  --light: #eee;
-  --pink: #ec4899;
-  --purple: #8b5cf6;
+  --dark: #7f95d1;
+  --darker: #4e4c79;
+  --darkest: #1c0221;
+  --light: #ffebe7;
+  --pink: #ff82a9;
+  --purple: #ffc0be;
 }
 
 * {
@@ -32,7 +31,7 @@ header {
 header h1 {
   font-size: 2.5rem;
   font-weight: 300;
-  color: var(--gray);
+  color: var(--light);
   margin-bottom: 1rem;
 }
 
@@ -59,12 +58,12 @@ button {
 }
 
 #new-task-input::placeholder {
-  color: var(--gray);
+  color: var(--darkest);
 }
 
 #new-task-submit {
   color: var(--pink);
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 700;
   background-image: linear-gradient(to right, var(--pink), var(--purple));
   -webkit-background-clip: text;
@@ -89,14 +88,10 @@ main {
   margin: 0 auto;
 }
 
-.task-list {
-  padding: 1rem;
-}
-
 .task-list h2 {
   font-size: 1.5rem;
   font-weight: 300;
-  color: var(--gray);
+  color: var(--light);
   margin-bottom: 1rem;
 }
 
