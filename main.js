@@ -1,3 +1,7 @@
+"use strict";
+
+import { data } from "storage";
+
 window.addEventListener("load", () => {
   const form = document.querySelector("#new-task-form");
   const input = document.querySelector("#new-task-input");
@@ -12,7 +16,7 @@ window.addEventListener("load", () => {
     elementsToSave = [];
     if (elements != null) {
       console.log("noni tulostetaas");
-      for (i of elements) {
+      for (let i of elements) {
         // task-elementin rakentaminen
         const task = document.createElement("div");
         task.classList.add("task");
@@ -61,6 +65,9 @@ window.addEventListener("load", () => {
               elementsToSave.splice(elements.indexOf(i), 1);
               // päivitetään localStorage
               localStorage.setItem("elements", JSON.stringify(elementsToSave));
+
+              // päivitetään localStorage storage-moduulin avulla
+              data.set("elements", JSON.stringify(elementsToSave));
               location.reload();
             }
           }
@@ -122,6 +129,9 @@ window.addEventListener("load", () => {
     localStorage.clear();
     // päivitetyn elements-taulukon tallentaminen localStorageen
     localStorage.setItem("elements", JSON.stringify(elementsToSave));
+
+    // päivitetään localStorage storage-moduulin avulla
+    data.set("elements", JSON.stringify(elementsToSave));
 
     input.value = "";
 
