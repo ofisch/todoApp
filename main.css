@@ -10,7 +10,9 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: "Fira sans", sans-serif;
+  /*font-family: "Fira sans", sans-serif;*/
+  font-family: "Dela Gothic One", cursive;
+  font-family: "Nunito", sans-serif;
 }
 
 body {
@@ -62,18 +64,22 @@ button {
 }
 
 #new-task-submit {
+  /*
   color: var(--pink);
-  font-size: 2rem;
-  font-weight: 700;
   background-image: linear-gradient(to right, var(--pink), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  */
+  font-size: 1.1rem;
+  font-weight: 700;
+
   cursor: pointer;
   transition: 0.4s;
 }
 
 #new-task-submit:hover {
   opacity: 0.8;
+  scale: 1.5;
 }
 
 #new-task-submit:active {
@@ -132,10 +138,12 @@ main {
   font-weight: 700;
   text-transform: uppercase;
   transition: 0.4s;
+  scale: 1.2;
 }
 
 .task .actions button:hover {
   opacity: 0.8;
+  scale: 1.5;
 }
 
 .task .actions button:active {
@@ -143,9 +151,11 @@ main {
 }
 
 .task .actions .edit {
+  /*
   background-image: linear-gradient(to right, var(--pink), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  */
 }
 
 .task .actions .delete {

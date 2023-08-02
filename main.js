@@ -27,6 +27,7 @@ window.addEventListener("load", () => {
         taskInput.type = "text";
         taskInput.value = i;
         taskInput.setAttribute("readonly", "readonly");
+        taskInput.setAttribute("spellcheck", false);
 
         taskContent.appendChild(taskInput);
 
@@ -35,11 +36,11 @@ window.addEventListener("load", () => {
 
         const taskEdit = document.createElement("button");
         taskEdit.classList.add("edit");
-        taskEdit.innerHTML = "Muokkaa";
+        taskEdit.innerHTML = "✍️";
 
         const taskDelete = document.createElement("button");
         taskDelete.classList.add("delete");
-        taskDelete.innerHTML = "Poista";
+        taskDelete.innerHTML = "🗑️";
 
         taskActions.appendChild(taskEdit);
         taskActions.appendChild(taskDelete);
@@ -68,10 +69,10 @@ window.addEventListener("load", () => {
         let indexOfValue;
 
         taskEdit.addEventListener("click", () => {
-          if (taskEdit.innerText.toLowerCase() == "muokkaa") {
+          if (taskEdit.innerText.toLowerCase() == "✍️") {
             taskInput.removeAttribute("readonly");
             taskInput.focus();
-            taskEdit.innerText = "Tallenna";
+            taskEdit.innerText = "💾";
 
             // haetaan muokattava elementti taulukosta
 
@@ -87,7 +88,7 @@ window.addEventListener("load", () => {
             }
           } else {
             taskInput.setAttribute("readonly", "readonly");
-            taskEdit.innerText = "Muokkaa";
+            taskEdit.innerText = "✍️";
 
             // muokatun version tallentaminen localStorageen
             console.log("taskInput.value: ", taskInput.value);
