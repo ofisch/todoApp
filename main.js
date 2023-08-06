@@ -1,6 +1,34 @@
 "use strict";
 
-import { data } from "storage";
+const data = {
+  set: function (key, value) {
+    if (!key || !value) {
+      return;
+    }
+
+    if (value == null) {
+      return false;
+    }
+
+    if (typeof value === "object") {
+      value = JSON.stringify(value);
+    }
+    localStorage.setItem(key, value);
+    //console.log(`key: ${key}, value: ${value}`);
+  },
+  get: function (key) {
+    const value = localStorage.getItem(key);
+
+    if (!value) {
+      return;
+    }
+
+    if (value[0] === "{") {
+      value = JSON.parse(value);
+    }
+    return value;
+  },
+};
 
 window.addEventListener("load", () => {
   const form = document.querySelector("#new-task-form");
@@ -131,7 +159,14 @@ window.addEventListener("load", () => {
     localStorage.setItem("elements", JSON.stringify(elementsToSave));
 
     // päivitetään localStorage storage-moduulin avulla
-    data.set("elements", JSON.stringify(elementsToSave));
+    const olio = { id: 1, name: "pasi", ready: true };
+    const olio2 = { id: 2, name: "jani", ready: true };
+    const olio3 = { id: 3, name: "pertti", ready: true };
+
+    const olioLista = [olio, olio2, olio3];
+
+    data.set("elements", JSON.stringify(olioLista));
+    //data.set("elements", JSON.stringify(elementsToSave));
 
     input.value = "";
 
@@ -141,7 +176,6 @@ window.addEventListener("load", () => {
         */
 
     location.reload();
-
     /*
         taskElementEdit.addEventListener('click', () => {
             if (taskElementEdit.innerText.toLowerCase() == 'muokkaa') {
