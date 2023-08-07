@@ -115,7 +115,7 @@ window.addEventListener("load", () => {
             // haetaan muokattava elementti taulukosta
 
             for (i of elementsToSave) {
-              if (i == task.firstChild.firstChild.value) {
+              if (i.text == task.firstChild.firstChild.value) {
                 indexOfValue = elementsToSave.indexOf(i);
 
                 console.log(
@@ -130,10 +130,10 @@ window.addEventListener("load", () => {
 
             // muokatun version tallentaminen localStorageen
             console.log("taskInput.value: ", taskInput.value);
-            elementsToSave[indexOfValue] = taskInput.value;
+            elementsToSave[indexOfValue].text = taskInput.value;
 
             localStorage.clear();
-            localStorage.setItem("elements", JSON.stringify(elementsToSave));
+            data.set("elements", JSON.stringify(elementsToSave));
           }
         });
       }
