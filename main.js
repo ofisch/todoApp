@@ -57,7 +57,10 @@ window.addEventListener("load", () => {
         const taskInput = document.createElement("input");
         taskInput.classList.add("text");
         taskInput.type = "text";
-        taskInput.value = i;
+        // aikasempi:
+        // taskInput.value = i;
+        // nyt ku käytetään olioita, nii tulostetaan text-kentän sisältö
+        taskInput.value = i.text;
         taskInput.setAttribute("readonly", "readonly");
         taskInput.setAttribute("spellcheck", false);
 
@@ -150,6 +153,20 @@ window.addEventListener("load", () => {
       return;
     }
 
+    // TODO: muuta elementtien tallentaminen olio-muotoseks
+    // tällä hetkellä tallennetaan vaa merkkijonoja
+
+    let taskToSave = {
+      id: elementsToSave.length,
+      text: task,
+      checked: false,
+    };
+
+    elementsToSave.push(taskToSave);
+    localStorage.clear();
+    data.set("elements", JSON.stringify(elementsToSave));
+
+    /*
     // elementin tallentamineen elements-taulukkoon
     elementsToSave.push(task);
     console.log("uusin elementti joka tallennetaan: ", elementsToSave);
@@ -157,15 +174,17 @@ window.addEventListener("load", () => {
     localStorage.clear();
     // päivitetyn elements-taulukon tallentaminen localStorageen
     localStorage.setItem("elements", JSON.stringify(elementsToSave));
+    */
 
-    // päivitetään localStorage storage-moduulin avulla
-    const olio = { id: 1, name: "pasi", ready: true };
-    const olio2 = { id: 2, name: "jani", ready: true };
-    const olio3 = { id: 3, name: "pertti", ready: true };
-
+    /*
+    // päivitetään localStorage data-facaden avulla
+    const olio = { id: 1, text: "pasi", checked: true };
+    const olio2 = { id: 2, text: "jani", checked: true };
+    const olio3 = { id: 3, text: "pertti", checked: true };
+    
     const olioLista = [olio, olio2, olio3];
+    */
 
-    data.set("elements", JSON.stringify(olioLista));
     //data.set("elements", JSON.stringify(elementsToSave));
 
     input.value = "";
