@@ -88,14 +88,12 @@ window.addEventListener("load", () => {
 
         taskDelete.addEventListener("click", () => {
           for (i of elementsToSave) {
-            if (i == task.firstChild.firstChild.value) {
+            if (i.text == task.firstChild.firstChild.value) {
               console.log(
                 "poistettava arvo: ",
                 task.firstChild.firstChild.value
               );
               elementsToSave.splice(elements.indexOf(i), 1);
-              // päivitetään localStorage
-              localStorage.setItem("elements", JSON.stringify(elementsToSave));
 
               // päivitetään localStorage storage-moduulin avulla
               data.set("elements", JSON.stringify(elementsToSave));
