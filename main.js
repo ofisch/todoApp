@@ -1,5 +1,6 @@
 "use strict";
 
+// data-facade, jolla saadaan olioita tallennettuu localStorageen
 const data = {
   set: function (key, value) {
     if (!key || !value) {
@@ -57,14 +58,23 @@ window.addEventListener("load", () => {
         const taskInput = document.createElement("input");
         taskInput.classList.add("text");
         taskInput.type = "text";
-        // aikasempi:
-        // taskInput.value = i;
-        // nyt ku käytetään olioita, nii tulostetaan text-kentän sisältö
+
         taskInput.value = i.text;
         taskInput.setAttribute("readonly", "readonly");
         taskInput.setAttribute("spellcheck", false);
 
+        const taskCheck = document.createElement("div");
+        taskCheck.classList.add("task-check");
+        const checkBox = document.createElement("input");
+        checkBox.setAttribute("type", "checkbox");
+        checkBox.classList.add("check");
+        taskCheck.appendChild(checkBox);
+
         taskContent.appendChild(taskInput);
+        taskContent.appendChild(taskCheck);
+
+        if (i.checked) checkBox.checked = true;
+        else checkBox.checked = false;
 
         const taskActions = document.createElement("div");
         taskActions.classList.add("actions");
@@ -134,6 +144,20 @@ window.addEventListener("load", () => {
             data.set("elements", JSON.stringify(elementsToSave));
           }
         });
+
+        checkBox.addEventListener("click", () => {
+          if (i.checked) {
+            checkBox.checked = false;
+            i.checked = false;
+            localStorage.clear();
+            data.set("elements", JSON.stringify(elementsToSave));
+          } else {
+            checkBox.checked = true;
+            i.checked = true;
+            localStorage.clear();
+            data.set("elements", JSON.stringify(elementsToSave));
+          }
+        });
       }
       console.log("elementsToSave: ", elementsToSave);
     }
@@ -151,9 +175,6 @@ window.addEventListener("load", () => {
       return;
     }
 
-    // TODO: muuta elementtien tallentaminen olio-muotoseks
-    // tällä hetkellä tallennetaan vaa merkkijonoja
-
     let taskToSave = {
       id: elementsToSave.length,
       text: task,
@@ -164,60 +185,8 @@ window.addEventListener("load", () => {
     localStorage.clear();
     data.set("elements", JSON.stringify(elementsToSave));
 
-    /*
-    // elementin tallentamineen elements-taulukkoon
-    elementsToSave.push(task);
-    console.log("uusin elementti joka tallennetaan: ", elementsToSave);
-    // eka localStorage tyhjäks
-    localStorage.clear();
-    // päivitetyn elements-taulukon tallentaminen localStorageen
-    localStorage.setItem("elements", JSON.stringify(elementsToSave));
-    */
-
-    /*
-    // päivitetään localStorage data-facaden avulla
-    const olio = { id: 1, text: "pasi", checked: true };
-    const olio2 = { id: 2, text: "jani", checked: true };
-    const olio3 = { id: 3, text: "pertti", checked: true };
-    
-    const olioLista = [olio, olio2, olio3];
-    */
-
-    //data.set("elements", JSON.stringify(elementsToSave));
-
     input.value = "";
 
-    /*
-        // tulostetaan elementit uudestaan (päivitettynä)
-        renderElements();
-        */
-
     location.reload();
-    /*
-        taskElementEdit.addEventListener('click', () => {
-            if (taskElementEdit.innerText.toLowerCase() == 'muokkaa') {
-                taskElementInput.removeAttribute('readonly');
-            taskElementInput.focus();
-            taskElementEdit.innerText = "Tallenna";
-            } else {
-                taskElementInput.setAttribute("readonly", "readonly");
-                taskElementEdit.innerText = "Muokkaa";
-            }
-        })
-
-        taskElementDelete.addEventListener('click', () => {
-            // poistetaan elementtiListasta
-            listElement.removeChild(taskElement);
-            // poistetaan taulukosta
-            for (i of elements) {
-                if (i == taskElement.firstChild.firstChild.value) {
-                    console.log('poistettava arvo: ', taskElement.firstChild.firstChild.value);
-                    elements.splice(elements.indexOf(i), 1);
-                    // päivitetään localStorage
-                    localStorage.setItem('elements', JSON.stringify(elements));
-                }
-            }        
-        })
-        */
   });
 });

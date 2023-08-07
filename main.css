@@ -10,7 +10,6 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  /*font-family: "Fira sans", sans-serif;*/
   font-family: "Dela Gothic One", cursive;
   font-family: "Nunito", sans-serif;
 }
@@ -43,7 +42,6 @@ header h1 {
 
 input,
 button {
-  appearance: none;
   border: none;
   outline: none;
   background: none;
@@ -64,12 +62,6 @@ button {
 }
 
 #new-task-submit {
-  /*
-  color: var(--pink);
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  */
   font-size: 1.1rem;
   font-weight: 700;
 
@@ -111,7 +103,8 @@ main {
 }
 
 #tasks .task .content {
-  flex: 1 1 0%;
+  display: flex;
+  flex: 1;
 }
 
 #tasks .task .content .text {
@@ -120,6 +113,7 @@ main {
   width: 100%;
   display: block;
   transform: 0.4s;
+  margin-left: 2rem;
 }
 
 #tasks .task .content .text:not(:read-only) {
@@ -150,14 +144,48 @@ main {
   opacity: 0.6;
 }
 
-.task .actions .edit {
-  /*
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  */
+.task .task-check {
+  position: absolute;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
-.task .actions .delete {
-  color: crimson;
+.check {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.container:hover input ~ .check {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .check {
+  background-color: #2196f3;
+}
+
+.check:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .check:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
